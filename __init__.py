@@ -1,8 +1,12 @@
 from mycroft import MycroftSkill, intent_handler
 from adapt.intent import IntentBuilder
 import csv
-#import sys
-#from csv_test import csv_extract
+import cv2
+import time
+from .testOpencv import take_photo
+from multiprocessing import Process, Queue
+
+
 
 class Voiceassistant(MycroftSkill):
     def __init__(self):
@@ -29,6 +33,20 @@ class Voiceassistant(MycroftSkill):
     	        self.speak('Wish you have a good day')
     	else:
     	    self.speak('No, you did not buy this stuff')
+    @intent_handler('view.goods.intent')
+    def handler_view_goods(self, message):	
+    	self.speak('Taking a photo now. Please wait a second for me to get the result')
+    	self.img_multi = ''
+    	self.img_hand = ''
+    	img_queue = Queue()
+    	take_photo_process = Process(target = take_photo, args=(img_queue,))
+    	take_photo_process.daemon = True
+    	take_photo_process.start()
+    	take_photo_process.join()
+    	self.img_mult = img_queue.get()
+    	self.speak('I find some goods here, you can ask me whatever goods you want.', expect_response=True)
+    	
+
 
 
 def create_skill():

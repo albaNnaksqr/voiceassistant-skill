@@ -10,8 +10,8 @@ def take_photo(img_queue):
     LOGSTR = '********************====================########## '
     LOG.info(LOGSTR + 'take photo process start')
     cap = cv2.VideoCapture(0)
-    img_name = 'cap_img_' + str(time.time()) + '.jpg'
-    img_path = './CV/' + img_name # Remember to update path to image
+    img_name = 'test.jpg'
+    img_path = '/home/ai-user/mycroft-core/skills/voiceassistant-skill/' + img_name # Remember to update path to image
 
     #<-- Take photo in specific time duration -->
     cout = 0

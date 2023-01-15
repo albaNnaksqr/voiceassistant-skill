@@ -8,10 +8,10 @@ import sys
 MYCROFT_VERSION = True
 TEST_IMAGE_PATH = './1.jpeg'
 if MYCROFT_VERSION:
-    from util import callAPI, encode_image_from_file
+    from .util import callAPI, encode_image_from_file
     from mycroft.util import LOG
 else:
-    from util import callAPI, encode_image_from_file
+    from .util import callAPI, encode_image_from_file
     
 def getObjectsThenLabel(image_file):
 
